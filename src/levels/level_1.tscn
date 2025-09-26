@@ -1,42 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=3 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
-[ext_resource type="Script" uid="uid://cp0mbbafdqoal" path="res://src/characters/enemy.gd" id="2_kg615"]
-
-[sub_resource type="Gradient" id="Gradient_kg615"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5ev4"]
-gradient = SubResource("Gradient_kg615")
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vgtt4"]
-gradient = SubResource("Gradient_kg615")
-width = 464
-height = 214
+[ext_resource type="PackedScene" uid="uid://2cmv0rucyuv" path="res://src/characters/slime_enemy.tscn" id="2_kg615"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_un1bx")
 metadata/_custom_type_script = "uid://dq0lruda4lttv"
 
-[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
-position = Vector2(220, 151)
-script = ExtResource("2_kg615")
-sprite = NodePath("Sprite2D")
-metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+[node name="Slime" parent="." instance=ExtResource("2_kg615")]
+position = Vector2(118, 98)
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-texture = SubResource("GradientTexture2D_u5ev4")
+[node name="Slime2" parent="." instance=ExtResource("2_kg615")]
+position = Vector2(997, 255)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
-polygon = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
-
-[node name="Enemy2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
-position = Vector2(515, 326)
-script = ExtResource("2_kg615")
-sprite = NodePath("Sprite2D")
-metadata/_custom_type_script = "uid://cp0mbbafdqoal"
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy2"]
-texture = SubResource("GradientTexture2D_vgtt4")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy2"]
-polygon = PackedVector2Array(-232, -107, -232, 107, 232, 107, 232, -107)
+[node name="Slime3" parent="." instance=ExtResource("2_kg615")]
+position = Vector2(280, 392)
+speed = Vector2(600, 0)

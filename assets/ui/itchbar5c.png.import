@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3oegyveut4a"
-path="res://.godot/imported/itchenemy12.png-e1be7033b38a9b5d31b1b59b8509bfea.ctex"
+uid="uid://bk12hd6y5w1iv"
+path="res://.godot/imported/itchbar5c.png-bb694d68f41a7b68f287fd3b663c0cff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemys/itchenemy12.png"
-dest_files=["res://.godot/imported/itchenemy12.png-e1be7033b38a9b5d31b1b59b8509bfea.ctex"]
+source_file="res://assets/ui/itchbar5c.png"
+dest_files=["res://.godot/imported/itchbar5c.png-bb694d68f41a7b68f287fd3b663c0cff.ctex"]
 
 [params]
 

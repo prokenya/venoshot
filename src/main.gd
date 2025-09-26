@@ -1,10 +1,13 @@
 extends Node
 class_name Main
 
+
 @export var worlds:Array[PackedScene]
 @export var world:Node
 
 @export var main_menu:MainMenu
+@export var in_game_ui:GameUI
+@export var immutable_objects:Node2D
 func  _ready() -> void:
 	G.main = self
 

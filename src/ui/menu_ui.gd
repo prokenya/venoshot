@@ -10,6 +10,7 @@ extends Control
 @export var exit_button: Button
 
 var in_ui:bool = false
+
 func _ready() -> void:
 	set_audio()
 
@@ -32,6 +33,8 @@ func switch_ui() -> void:
 	else:
 		ui_animations.play("show_menu")
 	in_ui = !in_ui
+	
+	get_tree().paused = in_ui
 	await ui_animations.animation_finished
 	return
 
@@ -43,6 +46,7 @@ func start_game():
 
 func exit_to_main_menu():
 	get_tree().change_scene_to_packed(G.main_scene)
+	
 
 
 func set_audio(data: Data = G.data):

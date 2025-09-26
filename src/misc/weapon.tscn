@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmysdkh6mn4fo" path="res://src/misc/weapon.gd" id="1_ppxeo"]
 [ext_resource type="Texture2D" uid="uid://b0mo8dlew1i0m" path="res://assets/ui/itchreticle.png" id="2_7boka"]
-[ext_resource type="Texture2D" uid="uid://uwxqj055w0st" path="res://assets/enemys/itchpart14.png" id="3_3lyx8"]
+[ext_resource type="Texture2D" uid="uid://uwxqj055w0st" path="res://assets/enemies/itchpart14.png" id="3_3lyx8"]
 
 [sub_resource type="Gradient" id="Gradient_fyndt"]
 
@@ -160,6 +160,7 @@ texture = ExtResource("2_7boka")
 offset = Vector2(6.23, -15.435)
 
 [node name="RayCast2D" type="RayCast2D" parent="weapon_body"]
+hit_from_inside = true
 
 [node name="Timer" type="Timer" parent="weapon_body"]
 one_shot = true

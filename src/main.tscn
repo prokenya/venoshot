@@ -1,39 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm1ihsc5s8ipm"]
+[gd_scene load_steps=17 format=3 uid="uid://bm1ihsc5s8ipm"]
 
 [ext_resource type="Script" uid="uid://kqxx63pfyw37" path="res://src/main.gd" id="1_eewff"]
 [ext_resource type="PackedScene" uid="uid://c47cwpn6asvti" path="res://src/levels/level_1.tscn" id="2_3cfgd"]
 [ext_resource type="Theme" uid="uid://dwa7h0uwdtfam" path="res://src/ui/main.tres" id="2_5q4o7"]
 [ext_resource type="Script" uid="uid://cn6fwjc5etnp8" path="res://src/ui/menu_ui.gd" id="2_gh0ne"]
-[ext_resource type="Texture2D" uid="uid://bh37d202huc1q" path="res://assets/enemys/itchbar5a.png" id="5_kf8lf"]
+[ext_resource type="Script" uid="uid://da84tegg760ot" path="res://src/ui/in_game_ui.gd" id="5_5mrjc"]
+[ext_resource type="Texture2D" uid="uid://bk12hd6y5w1iv" path="res://assets/ui/itchbar5c.png" id="5_rlaii"]
 [ext_resource type="Texture2D" uid="uid://bxdmbkmh6p3k2" path="res://assets/ui/itchbar5.png" id="6_mgm53"]
 [ext_resource type="PackedScene" uid="uid://bap01fsknlpnx" path="res://src/misc/weapon.tscn" id="7_rlaii"]
-
-[sub_resource type="Animation" id="Animation_3cfgd"]
-resource_name = "show_menu"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("main_menu:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("main_menu:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="Animation" id="Animation_fyndt"]
 length = 0.001
@@ -62,15 +36,49 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_3cfgd"]
+resource_name = "show_menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main_menu:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("main_menu:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kmhfv"]
 _data = {
 &"RESET": SubResource("Animation_fyndt"),
 &"show_menu": SubResource("Animation_3cfgd")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uewes"]
-atlas = ExtResource("5_kf8lf")
-region = Rect2(384, 102, 63, 344)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5mrjc"]
+load_path = "res://.godot/imported/itchbar5c.png-bb694d68f41a7b68f287fd3b663c0cff.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf8lf"]
+atlas = SubResource("CompressedTexture2D_5mrjc")
+region = Rect2(346, 84, 67, 349)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgm53"]
+atlas = ExtResource("5_rlaii")
+region = Rect2(104, 88, 67, 349)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqbth"]
 atlas = ExtResource("6_mgm53")
@@ -80,14 +88,17 @@ region = Rect2(67, 31, 72, 447)
 atlas = ExtResource("6_mgm53")
 region = Rect2(306, 80, 59, 342)
 
-[node name="Main" type="Node" node_paths=PackedStringArray("main_menu")]
+[node name="Main" type="Node" node_paths=PackedStringArray("main_menu", "in_game_ui", "immutable_objects")]
 script = ExtResource("1_eewff")
 worlds = Array[PackedScene]([ExtResource("2_3cfgd")])
 main_menu = NodePath("UI/main_menu")
+in_game_ui = NodePath("UI/game_ui")
+immutable_objects = NodePath("immutable objects")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="main_menu" type="Control" parent="UI" node_paths=PackedStringArray("ui_animations", "sfx_spin_box", "music_spin_box", "start_button", "exit_button")]
+process_mode = 3
 visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
@@ -98,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_5q4o7")
 script = ExtResource("2_gh0ne")
-ui_animations = NodePath("PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer/SpinBoxmusic/AnimationPlayer")
+ui_animations = NodePath("AnimationPlayer")
 sfx_spin_box = NodePath("PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer/SpinBoxsfx")
 music_spin_box = NodePath("PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer/SpinBoxmusic")
 start_button = NodePath("PanelContainer/VBoxContainer/Start")
@@ -130,6 +141,7 @@ theme_override_font_sizes/font_size = 65
 text = "start"
 
 [node name="Exit" type="Button" parent="UI/main_menu/PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 65
@@ -159,24 +171,24 @@ text = "music"
 [node name="SpinBoxmusic" type="SpinBox" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer/SpinBoxmusic"]
-root_node = NodePath("../../../../../../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/main_menu"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_kmhfv")
 }
 
-[node name="in_game_ui" type="CanvasLayer" parent="UI"]
-layer = -255
-
-[node name="Control" type="Control" parent="UI/in_game_ui"]
+[node name="game_ui" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 8
+mouse_filter = 1
+script = ExtResource("5_5mrjc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/in_game_ui/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/game_ui"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -187,12 +199,16 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/in_game_ui/Control/HBoxContainer"]
+[node name="bullets_clip" type="TextureProgressBar" parent="UI/game_ui/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-texture = SubResource("AtlasTexture_uewes")
+size_flags_vertical = 8
+value = 94.0
+fill_mode = 3
+texture_under = SubResource("AtlasTexture_kf8lf")
+texture_progress = SubResource("AtlasTexture_mgm53")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/in_game_ui/Control/HBoxContainer"]
+[node name="hpbar" type="TextureProgressBar" parent="UI/game_ui/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 value = 74.0
