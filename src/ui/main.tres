@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dwa7h0uwdtfam"]
+
+[ext_resource type="Texture2D" uid="uid://8jbwbyhh3xc3" path="res://assets/ui/itchbutton8b.png" id="1_epad7"]
+[ext_resource type="FontFile" uid="uid://bei2a3ul2jeho" path="res://assets/ui/FRAHV.TTF" id="2_hkn3r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_epad7"]
+load_path = "res://.godot/imported/itchbutton8b.png-317b074c92dfd2439f31ce1dbc3d3801.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g48i7"]
+atlas = SubResource("CompressedTexture2D_epad7")
+region = Rect2(90, 41, 305, 129)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ovqo"]
+texture = SubResource("AtlasTexture_g48i7")
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+modulate_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkn3r"]
+atlas = ExtResource("1_epad7")
+region = Rect2(90, 41, 305, 129)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g48i7"]
+texture = SubResource("AtlasTexture_hkn3r")
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4vxtt"]
+texture = ExtResource("1_epad7")
+expand_margin_left = 30.0
+expand_margin_top = 15.0
+expand_margin_right = 30.0
+expand_margin_bottom = 15.0
+region_rect = Rect2(475, 7, 394, 169)
+
+[resource]
+default_font = ExtResource("2_hkn3r")
+default_font_size = 35
+Button/styles/hover = SubResource("StyleBoxTexture_4ovqo")
+Button/styles/normal = SubResource("StyleBoxTexture_g48i7")
+Button/styles/pressed = SubResource("StyleBoxTexture_4vxtt")
