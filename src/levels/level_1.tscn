@@ -1,18 +1,71 @@
-[gd_scene load_steps=3 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=11 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
+[ext_resource type="Script" uid="uid://djgkn1e5d8l06" path="res://src/misc/wave.gd" id="2_iygna"]
 [ext_resource type="PackedScene" uid="uid://2cmv0rucyuv" path="res://src/characters/slime_enemy.tscn" id="2_kg615"]
+[ext_resource type="Texture2D" uid="uid://bp1qcqomje8oe" path="res://assets/fonts/font1.png" id="3_u5ev4"]
+[ext_resource type="Texture2D" uid="uid://b5clde6soehbb" path="res://assets/fonts/itchprologue5.png" id="4_xk4xt"]
+[ext_resource type="Script" uid="uid://cfy7tvkca3bxw" path="res://src/misc/start_info_rect.gd" id="5_iygna"]
+[ext_resource type="AudioStream" uid="uid://8odhu1bi8qis" path="res://assets/audio/music/Level_1.mp3" id="7_l80tk"]
 
-[node name="World" type="Node2D"]
+[sub_resource type="Resource" id="Resource_l80tk"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemies_count = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_frwdw"]
+script = ExtResource("2_iygna")
+enemies_count = 2
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_q2d1y"]
+script = ExtResource("2_iygna")
+orbit = 3
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("enemies_parent")]
 script = ExtResource("1_un1bx")
+enemies_parent = NodePath("enemies")
+enemies = Array[PackedScene]([ExtResource("2_kg615")])
+waves = Array[ExtResource("2_iygna")]([SubResource("Resource_l80tk"), SubResource("Resource_frwdw"), SubResource("Resource_q2d1y")])
 metadata/_custom_type_script = "uid://dq0lruda4lttv"
 
-[node name="Slime" parent="." instance=ExtResource("2_kg615")]
-position = Vector2(118, 98)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -255
 
-[node name="Slime2" parent="." instance=ExtResource("2_kg615")]
-position = Vector2(997, 255)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_u5ev4")
 
-[node name="Slime3" parent="." instance=ExtResource("2_kg615")]
-position = Vector2(280, 392)
-speed = Vector2(600, 0)
+[node name="FG" type="CanvasLayer" parent="."]
+layer = 255
+
+[node name="OnStartRect" type="TextureRect" parent="FG"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -36.0
+offset_right = 64.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xk4xt")
+script = ExtResource("5_iygna")
+duration = 2.0
+metadata/_custom_type_script = "uid://cfy7tvkca3bxw"
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_l80tk")
+autoplay = true
+bus = &"music"

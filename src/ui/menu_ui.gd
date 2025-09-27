@@ -9,19 +9,24 @@ extends Control
 @export var start_button: Button
 @export var exit_button: Button
 
-var in_ui:bool = false
+@export var resume_button:Button
+
+var in_ui: bool = false
+
 
 func _ready() -> void:
 	set_audio()
 
 	start_button.pressed.connect(start_game)
+	resume_button.pressed.connect(switch_ui)
 	exit_button.pressed.connect(exit_to_main_menu)
 
 	music_spin_box.value_changed.connect(_on_music_spin_box_value_changed)
 	sfx_spin_box.value_changed.connect(_on_sfx_spin_box_value_changed)
-	
+
 	switch_ui()
-	
+
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Menu"):
 		switch_ui()
@@ -33,20 +38,23 @@ func switch_ui() -> void:
 	else:
 		ui_animations.play("show_menu")
 	in_ui = !in_ui
-	
+
 	get_tree().paused = in_ui
 	await ui_animations.animation_finished
 	return
+
 
 func start_game():
 	await switch_ui()
 	G.main.load_world(0)
 	start_button.visible = !start_button.visible
 	exit_button.show()
+	G.main.in_game_ui.show()
+	resume_button.show()
+
 
 func exit_to_main_menu():
 	get_tree().change_scene_to_packed(G.main_scene)
-	
 
 
 func set_audio(data: Data = G.data):

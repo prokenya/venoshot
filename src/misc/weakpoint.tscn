@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvt01yo2rsqiq"]
+
+[ext_resource type="Script" uid="uid://d4n37urts2k1p" path="res://src/misc/weakpoint.gd" id="1_luaaj"]
+[ext_resource type="Texture2D" uid="uid://eji7q5t4me4s" path="res://assets/enemies/itchweakpoint1.png" id="1_tfbym"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_luaaj"]
+radius = 30.0
+
+[node name="weakpoint" type="Area2D"]
+collision_priority = 100.0
+priority = 100
+script = ExtResource("1_luaaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_luaaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(-3.2, -1.72)
+scale = Vector2(0.155, 0.155)
+texture = ExtResource("1_tfbym")

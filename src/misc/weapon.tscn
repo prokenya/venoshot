@@ -1,16 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://bap01fsknlpnx"]
+[gd_scene load_steps=13 format=3 uid="uid://bap01fsknlpnx"]
 
 [ext_resource type="Script" uid="uid://dmysdkh6mn4fo" path="res://src/misc/weapon.gd" id="1_ppxeo"]
+[ext_resource type="Texture2D" uid="uid://sv2lnelghh8a" path="res://assets/misc/itchgun3.png" id="2_3lyx8"]
 [ext_resource type="Texture2D" uid="uid://b0mo8dlew1i0m" path="res://assets/ui/itchreticle.png" id="2_7boka"]
 [ext_resource type="Texture2D" uid="uid://uwxqj055w0st" path="res://assets/enemies/itchpart14.png" id="3_3lyx8"]
+[ext_resource type="Texture2D" uid="uid://coj6emibdgfly" path="res://assets/misc/itchgun3a.png" id="3_kmwgl"]
+[ext_resource type="AudioStream" uid="uid://dshnyvfwuw4f3" path="res://assets/audio/sfx/GunShotSFX(Normal).mp3" id="6_kmwgl"]
 
-[sub_resource type="Gradient" id="Gradient_fyndt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8130v"]
+atlas = ExtResource("2_3lyx8")
+region = Rect2(0, 0, 360, 360)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_kmhfv"]
-gradient = SubResource("Gradient_fyndt")
-width = 25
-height = 115
-fill_from = Vector2(1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmwgl"]
+atlas = ExtResource("3_kmwgl")
+region = Rect2(0, 0, 360, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2s2ns"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8130v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmwgl")
+}],
+"loop": true,
+"name": &"shot",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_5mrjc"]
 length = 0.001
@@ -144,36 +166,34 @@ _data = {
 &"shot_animation_normal": SubResource("Animation_rlaii")
 }
 
-[node name="weapon" type="Node2D"]
-
-[node name="weapon_body" type="Sprite2D" parent="." node_paths=PackedStringArray("scope", "ray", "timer")]
-z_index = 1
-texture = SubResource("GradientTexture2D_kmhfv")
+[node name="weapon" type="Node2D" node_paths=PackedStringArray("weapon_body", "scope", "ray", "timer", "shot_sprite", "animation_player", "shot_audio")]
 script = ExtResource("1_ppxeo")
-scope = NodePath("scope")
-ray = NodePath("RayCast2D")
+weapon_body = NodePath("weapon_body")
+scope = NodePath("weapon_body/scope")
+ray = NodePath("weapon_body/RayCast2D")
 timer = NodePath("Timer")
+shot_sprite = NodePath("Shot")
+animation_player = NodePath("AnimationPlayer")
+shot_audio = NodePath("shoot_audio")
+metadata/_custom_type_script = "uid://dmysdkh6mn4fo"
+
+[node name="weapon_body" type="AnimatedSprite2D" parent="."]
+z_index = 1000
+sprite_frames = SubResource("SpriteFrames_2s2ns")
 
 [node name="scope" type="Sprite2D" parent="weapon_body"]
+z_index = 1000
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_7boka")
 offset = Vector2(6.23, -15.435)
 
 [node name="RayCast2D" type="RayCast2D" parent="weapon_body"]
 hit_from_inside = true
-
-[node name="Timer" type="Timer" parent="weapon_body"]
-one_shot = true
-
-[node name="Label" type="Label" parent="weapon_body"]
-offset_left = -144.0
-offset_top = 2.0
-offset_right = -104.0
-offset_bottom = 25.0
+collide_with_areas = true
 
 [node name="Shot" type="Sprite2D" parent="."]
 visible = false
-z_index = 1
+z_index = 1000
 texture = ExtResource("3_3lyx8")
 hframes = 2
 
@@ -182,3 +202,12 @@ root_node = NodePath("../weapon_body")
 libraries = {
 &"": SubResource("AnimationLibrary_kf8lf")
 }
+speed_scale = 4.0
+
+[node name="shoot_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_kmwgl")
+bus = &"sfx"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
