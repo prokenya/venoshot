@@ -5,6 +5,7 @@ class_name WorldStatus
 @onready var wave_count: Label = %wave_count
 @onready var game_over_sound: AudioStreamPlayer = $game_over/game_over_sound
 @onready var win: AudioStreamPlayer = $win/WIN
+@onready var credits: AudioStreamPlayer = $credits/credits
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func show_win():
 	await  get_tree().create_timer(1).timeout
 	win.play()
 	await animation_player.animation_finished
+	credits.play()
 	animation_player.play("show_credits",-1,1)
 	await animation_player.animation_finished
 	G.main.main_menu.exit_to_main_menu()

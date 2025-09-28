@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=62 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
 [ext_resource type="Script" uid="uid://djgkn1e5d8l06" path="res://src/misc/wave.gd" id="2_iygna"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cdec8dtdyunie" path="res://assets/fonts/itchwin4.png" id="17_077sa"]
 [ext_resource type="AudioStream" uid="uid://c5mgngnloka4t" path="res://assets/audio/sfx/Victory.mp3" id="18_r7usx"]
 [ext_resource type="Texture2D" uid="uid://biiv0xhuwqheq" path="res://assets/fonts/itchcredits2.png" id="19_svo37"]
+[ext_resource type="AudioStream" uid="uid://bu5lg2yrr4f80" path="res://assets/audio/music/Credits.mp3" id="20_5ib0j"]
 
 [sub_resource type="Resource" id="Resource_vo5gq"]
 script = ExtResource("2_iygna")
@@ -254,33 +255,6 @@ hold_next_wave = true
 not_required_to_clear = true
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
-[sub_resource type="Animation" id="Animation_svtf7"]
-resource_name = "show_wave_count"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("wave:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("wave:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_7q1rl"]
 length = 0.001
 tracks/0/type = "value"
@@ -408,34 +382,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_r7usx"]
-resource_name = "win"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("win:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("win:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 4, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_svo37"]
 resource_name = "show_credits"
 length = 8.0
@@ -459,6 +405,61 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_svtf7"]
+resource_name = "show_wave_count"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wave:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wave:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r7usx"]
+resource_name = "win"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("win:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("win:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 4, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -593,6 +594,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_svo37")
+
+[node name="credits" type="AudioStreamPlayer" parent="FG/credits"]
+stream = ExtResource("20_5ib0j")
+bus = &"music"
 
 [node name="enemies" type="Node2D" parent="."]
 
