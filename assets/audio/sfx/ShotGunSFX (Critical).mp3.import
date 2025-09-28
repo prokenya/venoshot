@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://df5g2wyok1lt5"
+path="res://.godot/imported/ShotGunSFX (Critical).mp3-85ffc5703eb42069b4929c1897500d36.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/ShotGunSFX (Critical).mp3"
+dest_files=["res://.godot/imported/ShotGunSFX (Critical).mp3-85ffc5703eb42069b4929c1897500d36.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

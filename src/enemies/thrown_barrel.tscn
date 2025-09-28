@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://3iaxuhu6ab4s"]
+
+[ext_resource type="Script" uid="uid://dnii6knn3uxbb" path="res://src/enemies/thrown_barrel.gd" id="1_4v80t"]
+[ext_resource type="Texture2D" uid="uid://bd7cuglddvbnt" path="res://assets/enemies/itchbarrel1.png" id="2_7it1h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i3y7n"]
+bounce = 1.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dceei"]
+size = Vector2(100, 147)
+
+[node name="Thrown barrel" type="RigidBody2D"]
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_i3y7n")
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 100
+script = ExtResource("1_4v80t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_dceei")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_7it1h")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

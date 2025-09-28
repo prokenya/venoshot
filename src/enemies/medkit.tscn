@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds6xosdch3et4"]
+
+[ext_resource type="Script" uid="uid://dm2xcvqmj7tvx" path="res://src/enemies/medkit.gd" id="1_r3ji0"]
+[ext_resource type="Texture2D" uid="uid://dp7hdlhfbbimx" path="res://assets/misc/itchheal.png" id="2_e25i1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e25i1"]
+size = Vector2(400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oote7"]
+atlas = ExtResource("2_e25i1")
+region = Rect2(0, 0, 480, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xng72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oote7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oote7")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
+[node name="medkit" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_r3ji0")
+hp = 1
+max_hp = 1
+enemy_damage = 5
+sprite = NodePath("CollisionShape2D/AnimatedSprite2D")
+collider = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.205, 0.205)
+shape = SubResource("RectangleShape2D_e25i1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+sprite_frames = SubResource("SpriteFrames_xng72")
+animation = &"die"

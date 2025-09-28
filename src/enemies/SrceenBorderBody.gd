@@ -17,6 +17,7 @@ signal rebound_threshold_reached
 		z_index = current_orbit
 		collision_priority = current_orbit
 		sprite.modulate = Color.WHITE.lerp(Color(0.0, 0.0, 0.0, 1.0),float(max_orbit)/float(current_orbit) * 0.1)
+var target_orbit_y:float
 @export var use_bottom:bool = false
 @export var collider: Node2D
 
@@ -39,7 +40,6 @@ func _physics_process(delta: float) -> void:
 
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	var half_width = (frame_tex.get_size().x * collider.scale.x) / 2.0
-	var half_height = (frame_tex.get_size().y * collider.scale.y) / 2.0
 
 	var left = view_rect.position.x + half_width
 	var right = view_rect.position.x + view_rect.size.x - half_width
@@ -71,7 +71,7 @@ func anim_orbit_move(duration: float = 1):
 		top = 0.0
 	
 	var step = work_height / (max_orbit + 1)
-	var target_y = top + step * current_orbit
+	target_orbit_y = top + step * current_orbit
 
 
 	var target_scale:Vector2 = collider_base_scale + Vector2(current_orbit, current_orbit) * .1
@@ -80,7 +80,7 @@ func anim_orbit_move(duration: float = 1):
 		orbit_tweeen.kill()
 
 	orbit_tweeen = create_tween().set_parallel(true)
-	orbit_tweeen.tween_property(self, "position", Vector2(position.x + velocity.x, target_y), duration)
+	orbit_tweeen.tween_property(self, "position", Vector2(position.x + velocity.x, target_orbit_y), duration)
 	orbit_tweeen.tween_property(collider, "scale", target_scale, 1)
 	#print(target_scale)
 	#print(current_orbit)

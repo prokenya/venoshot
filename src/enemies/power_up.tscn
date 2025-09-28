@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7se0ec1t7uis"]
+
+[ext_resource type="Script" uid="uid://17u6ptteydlm" path="res://src/enemies/power_up.gd" id="1_cdpb3"]
+[ext_resource type="Texture2D" uid="uid://r7gmp40vojde" path="res://assets/misc/itchitem.png" id="2_28pkc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdpb3"]
+size = Vector2(400, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au2dh"]
+atlas = ExtResource("2_28pkc")
+region = Rect2(0, 0, 480, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_58fnm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au2dh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au2dh")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
+[node name="Power_up" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_cdpb3")
+hp = 1
+max_hp = 1
+enemy_damage = 0
+mask_color = Color(1, 1, 1, 1)
+sprite = NodePath("CollisionShape2D/AnimatedSprite2D")
+collider = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -0.7766715
+scale = Vector2(0.16, 0.16)
+shape = SubResource("RectangleShape2D_cdpb3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+rotation = 0.7766715
+sprite_frames = SubResource("SpriteFrames_58fnm")
+animation = &"die"

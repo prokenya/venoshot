@@ -11,6 +11,8 @@ extends Control
 
 @export var resume_button:Button
 
+@onready var main_menu_music: AudioStreamPlayer = $main_menu_music
+
 var in_ui: bool = false
 
 
@@ -45,6 +47,7 @@ func switch_ui() -> void:
 
 
 func start_game():
+	main_menu_music.stop()
 	await switch_ui()
 	G.main.load_world(0)
 	start_button.visible = !start_button.visible

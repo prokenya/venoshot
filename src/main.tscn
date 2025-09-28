@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bm1ihsc5s8ipm"]
+[gd_scene load_steps=26 format=3 uid="uid://bm1ihsc5s8ipm"]
 
 [ext_resource type="Script" uid="uid://kqxx63pfyw37" path="res://src/main.gd" id="1_eewff"]
 [ext_resource type="PackedScene" uid="uid://c47cwpn6asvti" path="res://src/levels/level_1.tscn" id="2_3cfgd"]
@@ -9,8 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://bxdmbkmh6p3k2" path="res://assets/ui/itchbar5.png" id="6_mgm53"]
 [ext_resource type="PackedScene" uid="uid://bap01fsknlpnx" path="res://src/misc/weapon.tscn" id="7_rlaii"]
 [ext_resource type="Texture2D" uid="uid://cv2tinycplco2" path="res://assets/ui/itchpause4.png" id="8_uewes"]
-[ext_resource type="Script" uid="uid://bw0ncuxrj2xbu" path="res://src/characters/player.gd" id="10_mgm53"]
+[ext_resource type="Script" uid="uid://bw0ncuxrj2xbu" path="res://src/enemies/player.gd" id="10_mgm53"]
+[ext_resource type="Texture2D" uid="uid://b0dqr4s1clvno" path="res://assets/fonts/itchlogoVS.png" id="10_mlv6i"]
+[ext_resource type="AudioStream" uid="uid://l1etr7h1fn56" path="res://assets/audio/sfx/PlayerHurtSFX.mp3" id="11_srxbw"]
 [ext_resource type="Script" uid="uid://d3auvolrg3iy" path="res://src/misc/shaker.gd" id="11_uewes"]
+[ext_resource type="Script" uid="uid://lv4a7eob24am" path="res://src/misc/collsion_screen_borders.gd" id="12_kqbth"]
+[ext_resource type="AudioStream" uid="uid://0swxy6mpfys1" path="res://assets/audio/music/Menu.mp3" id="14_d3u4l"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5mrjc"]
 load_path = "res://.godot/imported/itchbar5c.png-bb694d68f41a7b68f287fd3b663c0cff.ctex"
@@ -91,6 +95,12 @@ _data = {
 &"show_menu": SubResource("Animation_3cfgd")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uewes"]
+size = Vector2(1, 20000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqbth"]
+size = Vector2(20000, 1)
+
 [node name="Main" type="Node2D" node_paths=PackedStringArray("main_menu", "in_game_ui", "player", "shaker")]
 script = ExtResource("1_eewff")
 worlds = Array[PackedScene]([ExtResource("2_3cfgd")])
@@ -100,8 +110,10 @@ player = NodePath("immutable objects/player")
 shaker = NodePath("shaker")
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 255
 
 [node name="game_ui" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,6 +171,15 @@ start_button = NodePath("PanelContainer/VBoxContainer/Start")
 exit_button = NodePath("PanelContainer/VBoxContainer/Exit")
 resume_button = NodePath("PanelContainer/VBoxContainer/resume")
 
+[node name="TextureRect" type="TextureRect" parent="UI/main_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_mlv6i")
+
 [node name="pause" type="TextureRect" parent="UI/main_menu"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -182,10 +203,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -85.0
+offset_top = 284.0
+offset_right = 68.0
+offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -193,31 +214,36 @@ size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/main_menu/PanelContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="Start" type="Button" parent="UI/main_menu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 80
 text = "start"
 
 [node name="resume" type="Button" parent="UI/main_menu/PanelContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 80
 text = "resume"
 
 [node name="Exit" type="Button" parent="UI/main_menu/PanelContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 80
 text = "exit"
 
 [node name="FoldableContainer" type="FoldableContainer" parent="UI/main_menu/PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme_override_font_sizes/font_size = 90
 folded = true
 title = "settings"
+title_alignment = 1
 
 [node name="VBoxContainer" type="GridContainer" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer"]
 visible = false
@@ -227,6 +253,7 @@ columns = 2
 [node name="Label" type="Label" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 text = "sfx"
+horizontal_alignment = 2
 
 [node name="SpinBoxsfx" type="SpinBox" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
@@ -234,6 +261,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 text = "music"
+horizontal_alignment = 2
 
 [node name="SpinBoxmusic" type="SpinBox" parent="UI/main_menu/PanelContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
@@ -244,13 +272,37 @@ libraries = {
 &"": SubResource("AnimationLibrary_kmhfv")
 }
 
+[node name="main_menu_music" type="AudioStreamPlayer" parent="UI/main_menu"]
+stream = ExtResource("14_d3u4l")
+autoplay = true
+bus = &"music"
+
 [node name="immutable objects" type="Node2D" parent="."]
 
 [node name="weapon" parent="immutable objects" instance=ExtResource("7_rlaii")]
 position = Vector2(-130, -210)
 
-[node name="player" type="Node2D" parent="immutable objects"]
+[node name="player" type="Node2D" parent="immutable objects" node_paths=PackedStringArray("weapon")]
 script = ExtResource("10_mgm53")
+weapon = NodePath("../weapon")
+
+[node name="player_hurt" type="AudioStreamPlayer" parent="immutable objects/player"]
+stream = ExtResource("11_srxbw")
+bus = &"sfx"
+
+[node name="collsion_screen_borders" type="StaticBody2D" parent="immutable objects"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("12_kqbth")
+
+[node name="shape_left" type="CollisionShape2D" parent="immutable objects/collsion_screen_borders"]
+shape = SubResource("RectangleShape2D_uewes")
+
+[node name="shape_right" type="CollisionShape2D" parent="immutable objects/collsion_screen_borders"]
+shape = SubResource("RectangleShape2D_uewes")
+
+[node name="shape_bottom" type="CollisionShape2D" parent="immutable objects/collsion_screen_borders"]
+shape = SubResource("RectangleShape2D_kqbth")
 
 [node name="shaker" type="Node" parent="."]
 script = ExtResource("11_uewes")

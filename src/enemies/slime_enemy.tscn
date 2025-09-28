@@ -1,46 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://2cmv0rucyuv"]
+[gd_scene load_steps=14 format=3 uid="uid://2cmv0rucyuv"]
 
-[ext_resource type="Script" uid="uid://bev6mv36kjkpm" path="res://src/characters/slime_enemy.gd" id="1_j4pcm"]
+[ext_resource type="Script" uid="uid://bev6mv36kjkpm" path="res://src/enemies/slime_enemy.gd" id="1_j4pcm"]
 [ext_resource type="Texture2D" uid="uid://dx3oegyveut4a" path="res://assets/enemies/itchenemy12.png" id="2_y71sj"]
 [ext_resource type="PackedScene" uid="uid://cvt01yo2rsqiq" path="res://src/misc/weakpoint.tscn" id="3_5e5lm"]
+[ext_resource type="AudioStream" uid="uid://c405qd33sjla2" path="res://assets/audio/sfx/SlimeHitSFX.mp3" id="4_iowel"]
+[ext_resource type="AudioStream" uid="uid://dk0qj1yr0e3rg" path="res://assets/audio/sfx/SlimeDeathSFX.mp3" id="5_djdgo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkjuo"]
 radius = 149.35
 height = 382.3
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgtt4"]
-atlas = ExtResource("2_y71sj")
-region = Rect2(0, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l80tk"]
-atlas = ExtResource("2_y71sj")
-region = Rect2(0, 600, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_frwdw"]
-atlas = ExtResource("2_y71sj")
-region = Rect2(600, 600, 600, 600)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5e5lm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgtt4")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l80tk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_frwdw")
-}],
-"loop": false,
-"name": &"die",
-"speed": 5.0
-}]
 
 [sub_resource type="Animation" id="Animation_5e5lm"]
 length = 0.001
@@ -91,12 +59,47 @@ _data = {
 &"scale.y": SubResource("Animation_y71sj")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgtt4"]
+atlas = ExtResource("2_y71sj")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l80tk"]
+atlas = ExtResource("2_y71sj")
+region = Rect2(0, 600, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frwdw"]
+atlas = ExtResource("2_y71sj")
+region = Rect2(600, 600, 600, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5e5lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgtt4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l80tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frwdw")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
 collision_mask = 0
 script = ExtResource("1_j4pcm")
 hp = 3
 max_hp = 3
 mask_color = Color(0.49803922, 0, 1, 1)
+speed = Vector2(250, 0)
 sprite = NodePath("CollisionShape2D/AnimatedSprite2D")
 use_bottom = true
 collider = NodePath("CollisionShape2D")
@@ -108,19 +111,31 @@ rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_hkjuo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
-position = Vector2(39, 6.999998)
-rotation = -1.5707964
-sprite_frames = SubResource("SpriteFrames_5e5lm")
-autoplay = "default"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape2D"]
 libraries = {
 &"": SubResource("AnimationLibrary_hkjuo")
 }
 autoplay = "scale.y"
 
-[node name="weakpoint" parent="." instance=ExtResource("3_5e5lm")]
-position = Vector2(-37, -19)
-rotation = 1.5707964
-scale = Vector2(1.7, 1.7)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+position = Vector2(38.999992, 6.9999967)
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_5e5lm")
+autoplay = "default"
+
+[node name="weakpoint" parent="CollisionShape2D/AnimatedSprite2D" node_paths=PackedStringArray("body_to_damage") instance=ExtResource("3_5e5lm")]
+z_as_relative = false
+position = Vector2(-127.9999, -78.999985)
+scale = Vector2(1.2374994, 1.2374994)
+body_to_damage = NodePath("../../..")
+point_type = 1
+
+[node name="hit_slime" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_iowel")
+volume_db = 12.0
+bus = &"sfx"
+
+[node name="death_slime" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_djdgo")
+volume_db = 2.0
+bus = &"sfx"

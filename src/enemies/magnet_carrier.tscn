@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://dq47xk8nvc5um"]
+
+[ext_resource type="Script" uid="uid://cxcmo71ihvb1" path="res://src/enemies/magnet_carrier.gd" id="1_c74y5"]
+[ext_resource type="Texture2D" uid="uid://cl8n3bjc0lige" path="res://assets/enemies/itchenemy14b.png" id="2_b1dc8"]
+[ext_resource type="PackedScene" uid="uid://3iaxuhu6ab4s" path="res://src/enemies/thrown_barrel.tscn" id="2_v5dpy"]
+[ext_resource type="Texture2D" uid="uid://bdqahhgupdvij" path="res://assets/enemies/itchenemy14c.png" id="3_n2nbd"]
+[ext_resource type="PackedScene" uid="uid://cvt01yo2rsqiq" path="res://src/misc/weakpoint.tscn" id="4_njhom"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v5dpy"]
+radius = 125.0
+height = 392.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2nbd"]
+atlas = ExtResource("2_b1dc8")
+region = Rect2(0, 0, 472, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njhom"]
+atlas = ExtResource("2_b1dc8")
+region = Rect2(487, 0, 472, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5dpy"]
+atlas = ExtResource("3_n2nbd")
+region = Rect2(0, 0, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etc73"]
+atlas = ExtResource("3_n2nbd")
+region = Rect2(487, 0, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teqjs"]
+atlas = ExtResource("3_n2nbd")
+region = Rect2(0, 487, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_labxg"]
+atlas = ExtResource("3_n2nbd")
+region = Rect2(487, 487, 472, 472)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v5dpy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2nbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njhom")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5dpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etc73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teqjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_labxg")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
+[node name="Magnet carrier" type="CharacterBody2D" node_paths=PackedStringArray("barrel_spawn_point", "sprite", "collider")]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_c74y5")
+barrel_scene = ExtResource("2_v5dpy")
+barrel_spawn_point = NodePath("CollisionShape2D2/AnimatedSprite2D2/barell_spawn_point")
+max_hp = 5
+enemy_damage = 0
+mask_color = Color(6.617978e-08, 0.17933974, 0.08296644, 1)
+speed = Vector2(200, 0)
+sprite = NodePath("CollisionShape2D2/AnimatedSprite2D2")
+collider = NodePath("CollisionShape2D2")
+metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("CapsuleShape2D_v5dpy")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CollisionShape2D2"]
+position = Vector2(40, -20)
+sprite_frames = SubResource("SpriteFrames_v5dpy")
+autoplay = "default"
+
+[node name="barell_spawn_point" type="Marker2D" parent="CollisionShape2D2/AnimatedSprite2D2"]
+scale = Vector2(4, 4)
+
+[node name="weakpoint" parent="CollisionShape2D2/AnimatedSprite2D2" node_paths=PackedStringArray("body_to_damage") instance=ExtResource("4_njhom")]
+position = Vector2(-37.560974, -131.21951)
+body_to_damage = NodePath("../../..")

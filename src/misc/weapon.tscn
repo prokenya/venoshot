@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bap01fsknlpnx"]
+[gd_scene load_steps=18 format=3 uid="uid://bap01fsknlpnx"]
 
 [ext_resource type="Script" uid="uid://dmysdkh6mn4fo" path="res://src/misc/weapon.gd" id="1_ppxeo"]
 [ext_resource type="Texture2D" uid="uid://sv2lnelghh8a" path="res://assets/misc/itchgun3.png" id="2_3lyx8"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://uwxqj055w0st" path="res://assets/enemies/itchpart14.png" id="3_3lyx8"]
 [ext_resource type="Texture2D" uid="uid://coj6emibdgfly" path="res://assets/misc/itchgun3a.png" id="3_kmwgl"]
 [ext_resource type="AudioStream" uid="uid://dshnyvfwuw4f3" path="res://assets/audio/sfx/GunShotSFX(Normal).mp3" id="6_kmwgl"]
+[ext_resource type="AudioStream" uid="uid://cv2fh3x6vnfs7" path="res://assets/audio/sfx/GunReloadingSFX.mp3" id="7_8130v"]
+[ext_resource type="AudioStream" uid="uid://df5g2wyok1lt5" path="res://assets/audio/sfx/ShotGunSFX (Critical).mp3" id="8_q7vot"]
+[ext_resource type="AudioStream" uid="uid://bebb2kwkipok2" path="res://assets/audio/sfx/Empty shot.mp3" id="9_2s2ns"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8130v"]
 atlas = ExtResource("2_3lyx8")
@@ -63,38 +66,38 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Shot:hframes")
+tracks/2/path = NodePath("../Shot:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Shot:scale")
+tracks/3/path = NodePath("../Shot:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Shot:rotation")
+tracks/4/path = NodePath("../Shot:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_rlaii"]
@@ -126,51 +129,118 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Shot:hframes")
+tracks/2/path = NodePath("../Shot:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Shot:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.01, 0.01)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Shot:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Shot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.5707964]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Shot:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kmwgl"]
+resource_name = "shot_animation_critical"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Shot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Shot:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Shot:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.01, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Shot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5707964]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Shot:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kf8lf"]
 _data = {
 &"RESET": SubResource("Animation_5mrjc"),
+&"shot_animation_critical": SubResource("Animation_kmwgl"),
 &"shot_animation_normal": SubResource("Animation_rlaii")
 }
 
-[node name="weapon" type="Node2D" node_paths=PackedStringArray("weapon_body", "scope", "ray", "timer", "shot_sprite", "animation_player", "shot_audio")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_kmwgl"]
+radius = 3.0
+
+[node name="weapon" type="Node2D" node_paths=PackedStringArray("weapon_body", "scope", "shape_cast", "timer", "shot_sprite", "animation_player", "shot_audio")]
 script = ExtResource("1_ppxeo")
 weapon_body = NodePath("weapon_body")
 scope = NodePath("weapon_body/scope")
-ray = NodePath("weapon_body/RayCast2D")
+shape_cast = NodePath("ShapeCast2D")
 timer = NodePath("Timer")
 shot_sprite = NodePath("Shot")
 animation_player = NodePath("AnimationPlayer")
@@ -187,10 +257,6 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_7boka")
 offset = Vector2(6.23, -15.435)
 
-[node name="RayCast2D" type="RayCast2D" parent="weapon_body"]
-hit_from_inside = true
-collide_with_areas = true
-
 [node name="Shot" type="Sprite2D" parent="."]
 visible = false
 z_index = 1000
@@ -204,10 +270,27 @@ libraries = {
 }
 speed_scale = 4.0
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_kmwgl")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+
 [node name="shoot_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_kmwgl")
 bus = &"sfx"
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
+[node name="reloading" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_8130v")
+bus = &"sfx"
+
+[node name="shoot_critical" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_q7vot")
+bus = &"sfx"
+
+[node name="empty_shot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_2s2ns")
+bus = &"sfx"

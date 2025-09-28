@@ -1,20 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvt01yo2rsqiq"]
+[gd_scene load_steps=10 format=3 uid="uid://cvt01yo2rsqiq"]
 
 [ext_resource type="Script" uid="uid://d4n37urts2k1p" path="res://src/misc/weakpoint.gd" id="1_luaaj"]
 [ext_resource type="Texture2D" uid="uid://eji7q5t4me4s" path="res://assets/enemies/itchweakpoint1.png" id="1_tfbym"]
+[ext_resource type="Texture2D" uid="uid://dnil2yybk5xej" path="res://assets/enemies/itchweakpoint.png" id="3_y6vqw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_luaaj"]
 radius = 30.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr0yf"]
+atlas = ExtResource("1_tfbym")
+region = Rect2(0, 0, 480, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqgap"]
+atlas = ExtResource("3_y6vqw")
+region = Rect2(0, 0, 320, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6itdi"]
+atlas = ExtResource("3_y6vqw")
+region = Rect2(0, 0, 320, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyh0h"]
+atlas = ExtResource("3_y6vqw")
+region = Rect2(320, 0, 320, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ntcl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr0yf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqgap")
+}],
+"loop": true,
+"name": &"heart",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6itdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nyh0h")
+}],
+"loop": false,
+"name": &"heart_breaking",
+"speed": 5.0
+}]
+
 [node name="weakpoint" type="Area2D"]
-collision_priority = 100.0
-priority = 100
 script = ExtResource("1_luaaj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_luaaj")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+unique_name_in_owner = true
 position = Vector2(-3.2, -1.72)
 scale = Vector2(0.155, 0.155)
-texture = ExtResource("1_tfbym")
+sprite_frames = SubResource("SpriteFrames_4ntcl")
+frame_progress = 0.9324622

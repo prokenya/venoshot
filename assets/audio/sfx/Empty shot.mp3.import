@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bebb2kwkipok2"
+path="res://.godot/imported/Empty shot.mp3-93551fd98729089bc950e615cb3c6c06.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Empty shot.mp3"
+dest_files=["res://.godot/imported/Empty shot.mp3-93551fd98729089bc950e615cb3c6c06.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

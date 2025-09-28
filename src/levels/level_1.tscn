@@ -1,35 +1,485 @@
-[gd_scene load_steps=11 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=61 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
 [ext_resource type="Script" uid="uid://djgkn1e5d8l06" path="res://src/misc/wave.gd" id="2_iygna"]
-[ext_resource type="PackedScene" uid="uid://2cmv0rucyuv" path="res://src/characters/slime_enemy.tscn" id="2_kg615"]
+[ext_resource type="PackedScene" uid="uid://2cmv0rucyuv" path="res://src/enemies/slime_enemy.tscn" id="2_kg615"]
+[ext_resource type="PackedScene" uid="uid://cb62vkxrxi5jh" path="res://src/enemies/drill_enemy.tscn" id="3_frwdw"]
 [ext_resource type="Texture2D" uid="uid://bp1qcqomje8oe" path="res://assets/fonts/font1.png" id="3_u5ev4"]
+[ext_resource type="PackedScene" uid="uid://dq47xk8nvc5um" path="res://src/enemies/magnet_carrier.tscn" id="4_q2d1y"]
 [ext_resource type="Texture2D" uid="uid://b5clde6soehbb" path="res://assets/fonts/itchprologue5.png" id="4_xk4xt"]
+[ext_resource type="PackedScene" uid="uid://ds6xosdch3et4" path="res://src/enemies/medkit.tscn" id="5_fcumj"]
 [ext_resource type="Script" uid="uid://cfy7tvkca3bxw" path="res://src/misc/start_info_rect.gd" id="5_iygna"]
-[ext_resource type="AudioStream" uid="uid://8odhu1bi8qis" path="res://assets/audio/music/Level_1.mp3" id="7_l80tk"]
+[ext_resource type="PackedScene" uid="uid://b7se0ec1t7uis" path="res://src/enemies/power_up.tscn" id="6_ia7or"]
+[ext_resource type="PackedScene" uid="uid://cvbhv348l84tk" path="res://src/enemies/hidden_cloud.tscn" id="7_riplu"]
+[ext_resource type="PackedScene" uid="uid://bhero53kyb7pl" path="res://src/enemies/ufo.tscn" id="8_vo5gq"]
+[ext_resource type="AudioStream" uid="uid://5t8jh3lb1l3c" path="res://assets/audio/music/Level.mp3" id="11_ia7or"]
+[ext_resource type="Script" uid="uid://ng6nd7d346ts" path="res://src/ui/world_status.gd" id="11_svtf7"]
+[ext_resource type="Texture2D" uid="uid://otvcab4jb5b0" path="res://assets/fonts/itchsplash4.png" id="14_7q1rl"]
+[ext_resource type="Texture2D" uid="uid://by47eosta05ax" path="res://assets/fonts/itchgameover2.png" id="15_7q1rl"]
+[ext_resource type="AudioStream" uid="uid://cy5tqlwl72ab3" path="res://assets/audio/sfx/Game Over.mp3" id="16_f1p2y"]
+[ext_resource type="Texture2D" uid="uid://cdec8dtdyunie" path="res://assets/fonts/itchwin4.png" id="17_077sa"]
+[ext_resource type="AudioStream" uid="uid://c5mgngnloka4t" path="res://assets/audio/sfx/Victory.mp3" id="18_r7usx"]
+[ext_resource type="Texture2D" uid="uid://biiv0xhuwqheq" path="res://assets/fonts/itchcredits2.png" id="19_svo37"]
 
-[sub_resource type="Resource" id="Resource_l80tk"]
+[sub_resource type="Resource" id="Resource_vo5gq"]
 script = ExtResource("2_iygna")
 time_before_wave = 2.0
 enemies_count = 2
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
-[sub_resource type="Resource" id="Resource_frwdw"]
+[sub_resource type="Resource" id="Resource_q2tyl"]
 script = ExtResource("2_iygna")
 enemies_count = 2
 orbit = 2
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
-[sub_resource type="Resource" id="Resource_q2d1y"]
+[sub_resource type="Resource" id="Resource_svtf7"]
 script = ExtResource("2_iygna")
+orbit = 3
+hold_next_wave = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_7q1rl"]
+script = ExtResource("2_iygna")
+enemies_count = 5
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_f1p2y"]
+script = ExtResource("2_iygna")
+enemies_count = 5
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_r7usx"]
+script = ExtResource("2_iygna")
+enemy_type = 1
+enemies_count = 3
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_077sa"]
+script = ExtResource("2_iygna")
+enemy_type = 1
+enemies_count = 2
+orbit = 2
+hold_next_wave = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_svo37"]
+script = ExtResource("2_iygna")
+enemies_count = 4
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_5ib0j"]
+script = ExtResource("2_iygna")
+enemies_count = 4
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_sblag"]
+script = ExtResource("2_iygna")
+enemies_count = 3
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_bevbp"]
+script = ExtResource("2_iygna")
+enemy_type = 1
+enemies_count = 2
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_cp87p"]
+script = ExtResource("2_iygna")
+enemy_type = 6
+enemies_count = 5
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_nv4as"]
+script = ExtResource("2_iygna")
+enemy_type = 2
+enemies_count = 2
+hold_next_wave = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_6dq8q"]
+script = ExtResource("2_iygna")
+enemies_count = 10
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_dccqd"]
+script = ExtResource("2_iygna")
+time_before_wave = 5.0
+enemies_count = 10
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_nqqvn"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemies_count = 6
 orbit = 3
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("enemies_parent")]
+[sub_resource type="Resource" id="Resource_mrfvu"]
+script = ExtResource("2_iygna")
+enemy_type = 5
+enemies_count = 4
+hold_next_wave = true
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_5gh05"]
+script = ExtResource("2_iygna")
+time_before_wave = 25.0
+enemy_type = 1
+enemies_count = 5
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_gu6wu"]
+script = ExtResource("2_iygna")
+enemies_count = 5
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_88lg4"]
+script = ExtResource("2_iygna")
+enemy_type = 2
+enemies_count = 5
+orbit = 3
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_j0n5w"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemy_type = 6
+enemies_count = 5
+orbit = 3
+hold_next_wave = true
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_bniaj"]
+script = ExtResource("2_iygna")
+time_before_wave = 10.0
+enemy_type = 1
+enemies_count = 5
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_upltw"]
+script = ExtResource("2_iygna")
+enemy_type = 2
+enemies_count = 2
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_x386j"]
+script = ExtResource("2_iygna")
+enemy_type = 2
+enemies_count = 2
+orbit = 3
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_tm7u4"]
+script = ExtResource("2_iygna")
+time_before_wave = 1.0
+enemy_type = 6
+enemies_count = 3
+orbit = 4
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_hfu2f"]
+script = ExtResource("2_iygna")
+time_before_wave = 3.0
+enemy_type = 5
+enemies_count = 2
+hold_next_wave = true
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_m2r0a"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemies_count = 23
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_aof1p"]
+script = ExtResource("2_iygna")
+time_before_wave = 10.0
+enemies_count = 23
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_7t86w"]
+script = ExtResource("2_iygna")
+enemy_type = 5
+enemies_count = 4
+hold_next_wave = true
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_ygn84"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemies_count = 15
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_yjdh3"]
+script = ExtResource("2_iygna")
+time_before_wave = 10.0
+enemy_type = 1
+enemies_count = 6
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_d7y0v"]
+script = ExtResource("2_iygna")
+time_before_wave = 5.0
+enemy_type = 6
+enemies_count = 5
+orbit = 3
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_kr672"]
+script = ExtResource("2_iygna")
+time_before_wave = 20.0
+enemy_type = 2
+enemies_count = 5
+orbit = 2
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_p52to"]
+script = ExtResource("2_iygna")
+enemy_type = 5
+enemies_count = 2
+hold_next_wave = true
+not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Animation" id="Animation_svtf7"]
+resource_name = "show_wave_count"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wave:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wave:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7q1rl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wave:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wave:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("game_over:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("game_over:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("win:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("win:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("credits:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("credits:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f1p2y"]
+resource_name = "game_over"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("game_over:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("game_over:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r7usx"]
+resource_name = "win"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("win:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("win:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_svo37"]
+resource_name = "show_credits"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("credits:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("credits:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1p2y"]
+_data = {
+&"RESET": SubResource("Animation_7q1rl"),
+&"game_over": SubResource("Animation_f1p2y"),
+&"show_credits": SubResource("Animation_svo37"),
+&"show_wave_count": SubResource("Animation_svtf7"),
+&"win": SubResource("Animation_r7usx")
+}
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("enemies_parent", "projectiles", "world_status")]
 script = ExtResource("1_un1bx")
 enemies_parent = NodePath("enemies")
-enemies = Array[PackedScene]([ExtResource("2_kg615")])
-waves = Array[ExtResource("2_iygna")]([SubResource("Resource_l80tk"), SubResource("Resource_frwdw"), SubResource("Resource_q2d1y")])
+projectiles = NodePath("projectiles")
+enemies = Array[PackedScene]([ExtResource("2_kg615"), ExtResource("3_frwdw"), ExtResource("4_q2d1y"), ExtResource("5_fcumj"), ExtResource("6_ia7or"), ExtResource("7_riplu"), ExtResource("8_vo5gq")])
+waves = Array[ExtResource("2_iygna")]([SubResource("Resource_vo5gq"), SubResource("Resource_q2tyl"), SubResource("Resource_svtf7"), SubResource("Resource_7q1rl"), SubResource("Resource_f1p2y"), SubResource("Resource_r7usx"), SubResource("Resource_077sa"), SubResource("Resource_svo37"), SubResource("Resource_5ib0j"), SubResource("Resource_sblag"), SubResource("Resource_bevbp"), SubResource("Resource_cp87p"), SubResource("Resource_nv4as"), SubResource("Resource_6dq8q"), SubResource("Resource_dccqd"), SubResource("Resource_nqqvn"), SubResource("Resource_mrfvu"), SubResource("Resource_5gh05"), SubResource("Resource_gu6wu"), SubResource("Resource_88lg4"), SubResource("Resource_j0n5w"), SubResource("Resource_bniaj"), SubResource("Resource_upltw"), SubResource("Resource_x386j"), SubResource("Resource_tm7u4"), SubResource("Resource_hfu2f"), SubResource("Resource_m2r0a"), SubResource("Resource_aof1p"), SubResource("Resource_7t86w"), SubResource("Resource_ygn84"), SubResource("Resource_yjdh3"), SubResource("Resource_d7y0v"), SubResource("Resource_kr672"), SubResource("Resource_p52to")])
+world_status = NodePath("FG")
 metadata/_custom_type_script = "uid://dq0lruda4lttv"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -45,7 +495,8 @@ grow_vertical = 2
 texture = ExtResource("3_u5ev4")
 
 [node name="FG" type="CanvasLayer" parent="."]
-layer = 255
+layer = 254
+script = ExtResource("11_svtf7")
 
 [node name="OnStartRect" type="TextureRect" parent="FG"]
 visible = false
@@ -60,12 +511,98 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_xk4xt")
 script = ExtResource("5_iygna")
-duration = 2.0
+duration = 8.0
 metadata/_custom_type_script = "uid://cfy7tvkca3bxw"
+
+[node name="wave" type="TextureRect" parent="FG"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("14_7q1rl")
+
+[node name="wave_count" type="Label" parent="FG/wave"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 399.0
+offset_top = 185.0
+offset_right = 458.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 100
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FG"]
+libraries = {
+&"": SubResource("AnimationLibrary_f1p2y")
+}
+speed_scale = 0.5
+
+[node name="game_over" type="TextureRect" parent="FG"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.5
+offset_top = -240.0
+offset_right = 358.5
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_7q1rl")
+
+[node name="game_over_sound" type="AudioStreamPlayer" parent="FG/game_over"]
+stream = ExtResource("16_f1p2y")
+volume_db = 24.0
+bus = &"sfx"
+
+[node name="win" type="TextureRect" parent="FG"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_077sa")
+
+[node name="WIN" type="AudioStreamPlayer" parent="FG/win"]
+stream = ExtResource("18_r7usx")
+bus = &"sfx"
+
+[node name="credits" type="TextureRect" parent="FG"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_svo37")
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_l80tk")
+[node name="projectiles" type="Node2D" parent="."]
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ia7or")
 autoplay = true
+bus = &"music"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_r7usx")
 bus = &"music"

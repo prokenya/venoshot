@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dwa7h0uwdtfam"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://dwa7h0uwdtfam"]
 
 [ext_resource type="Texture2D" uid="uid://8jbwbyhh3xc3" path="res://assets/ui/itchbutton8b.png" id="1_epad7"]
 [ext_resource type="FontFile" uid="uid://bei2a3ul2jeho" path="res://assets/ui/FRAHV.TTF" id="2_hkn3r"]
@@ -33,9 +33,32 @@ expand_margin_right = 30.0
 expand_margin_bottom = 15.0
 region_rect = Rect2(475, 7, 394, 169)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vxtt"]
+atlas = ExtResource("1_epad7")
+region = Rect2(90, 215, 305, 129)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fjly5"]
+texture = SubResource("AtlasTexture_4vxtt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epad7"]
+atlas = ExtResource("1_epad7")
+region = Rect2(90, 375, 305, 129)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkn3r"]
+texture = SubResource("AtlasTexture_epad7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpt41"]
+texture = SubResource("AtlasTexture_4vxtt")
+
 [resource]
 default_font = ExtResource("2_hkn3r")
 default_font_size = 35
 Button/styles/hover = SubResource("StyleBoxTexture_4ovqo")
 Button/styles/normal = SubResource("StyleBoxTexture_g48i7")
 Button/styles/pressed = SubResource("StyleBoxTexture_4vxtt")
+FoldableContainer/styles/focus = SubResource("StyleBoxTexture_fjly5")
+FoldableContainer/styles/panel = SubResource("StyleBoxTexture_hkn3r")
+FoldableContainer/styles/title_collapsed_hover_panel = SubResource("StyleBoxTexture_fjly5")
+FoldableContainer/styles/title_collapsed_panel = SubResource("StyleBoxTexture_tpt41")
+FoldableContainer/styles/title_hover_panel = SubResource("StyleBoxTexture_fjly5")
+FoldableContainer/styles/title_panel = SubResource("StyleBoxTexture_fjly5")

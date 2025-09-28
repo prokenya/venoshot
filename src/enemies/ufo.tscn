@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://bhero53kyb7pl"]
+
+[ext_resource type="Script" uid="uid://dak72jtqkcsns" path="res://src/enemies/ufo.gd" id="1_c0l2m"]
+[ext_resource type="Texture2D" uid="uid://dqykrdcy48vyb" path="res://assets/enemies/itchenemy15.png" id="2_c0l2m"]
+[ext_resource type="Texture2D" uid="uid://sxq25c2auhwn" path="res://assets/enemies/itchenemy14a.png" id="3_eh1lk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkwlv"]
+radius = 88.0
+height = 272.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tq1j"]
+atlas = ExtResource("2_c0l2m")
+region = Rect2(0, 0, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvlgs"]
+atlas = ExtResource("2_c0l2m")
+region = Rect2(487, 0, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuwmo"]
+atlas = ExtResource("2_c0l2m")
+region = Rect2(0, 487, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g8ot"]
+atlas = ExtResource("3_eh1lk")
+region = Rect2(0, 487, 472, 472)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xklr"]
+atlas = ExtResource("3_eh1lk")
+region = Rect2(487, 487, 472, 472)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_be60t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tq1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvlgs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuwmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g8ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xklr")
+}],
+"loop": false,
+"name": &"die",
+"speed": 2.0
+}]
+
+[node name="UFO" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_c0l2m")
+transported_object = null
+hp = 2
+max_hp = 2
+enemy_damage = null
+mask_color = Color(0.3773543, 0.18016407, 0.99999994, 1)
+speed = Vector2(250, 0)
+bounce = null
+sprite = NodePath("CollisionShape2D/AnimatedSprite2D")
+rebound_threshold = null
+max_orbit = null
+current_orbit = null
+use_bottom = null
+collider = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.555, 0.555)
+shape = SubResource("CapsuleShape2D_lkwlv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+position = Vector2(-15.999999, 6.9938216e-07)
+rotation = -1.5707964
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_be60t")
+autoplay = "default"
