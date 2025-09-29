@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bm1ihsc5s8ipm"]
+[gd_scene load_steps=28 format=3 uid="uid://bm1ihsc5s8ipm"]
 
 [ext_resource type="Script" uid="uid://kqxx63pfyw37" path="res://src/main.gd" id="1_eewff"]
 [ext_resource type="PackedScene" uid="uid://c47cwpn6asvti" path="res://src/levels/level_1.tscn" id="2_3cfgd"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://da84tegg760ot" path="res://src/ui/in_game_ui.gd" id="5_5mrjc"]
 [ext_resource type="Texture2D" uid="uid://bk12hd6y5w1iv" path="res://assets/ui/itchbar5c.png" id="5_rlaii"]
 [ext_resource type="Texture2D" uid="uid://bxdmbkmh6p3k2" path="res://assets/ui/itchbar5.png" id="6_mgm53"]
+[ext_resource type="Texture2D" uid="uid://n4420dnni1h1" path="res://assets/ui/pause.png" id="6_tb146"]
+[ext_resource type="Script" uid="uid://c1hw6iabhqr8h" path="res://src/misc/tochscreen_show.gd" id="7_e7lu8"]
 [ext_resource type="PackedScene" uid="uid://bap01fsknlpnx" path="res://src/misc/weapon.tscn" id="7_rlaii"]
 [ext_resource type="Texture2D" uid="uid://cv2tinycplco2" path="res://assets/ui/itchpause4.png" id="8_uewes"]
 [ext_resource type="Script" uid="uid://bw0ncuxrj2xbu" path="res://src/enemies/player.gd" id="10_mgm53"]
@@ -152,6 +154,25 @@ fill_mode = 3
 texture_over = SubResource("AtlasTexture_kqbth")
 texture_progress = SubResource("AtlasTexture_srxbw")
 texture_progress_offset = Vector2(5.915, 49.24)
+
+[node name="TextureButton" type="TextureButton" parent="UI/game_ui"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_tb146")
+texture_pressed = ExtResource("6_tb146")
+texture_hover = ExtResource("6_tb146")
+texture_disabled = ExtResource("6_tb146")
+texture_focused = ExtResource("6_tb146")
+
+[node name="tochscreen_item" type="Node" parent="UI/game_ui/TextureButton"]
+script = ExtResource("7_e7lu8")
+metadata/_custom_type_script = "uid://c1hw6iabhqr8h"
 
 [node name="main_menu" type="Control" parent="UI" node_paths=PackedStringArray("ui_animations", "sfx_spin_box", "music_spin_box", "start_button", "exit_button", "resume_button")]
 process_mode = 3
@@ -306,3 +327,5 @@ shape = SubResource("RectangleShape2D_kqbth")
 
 [node name="shaker" type="Node" parent="."]
 script = ExtResource("11_uewes")
+
+[connection signal="pressed" from="UI/game_ui/TextureButton" to="UI/main_menu" method="switch_ui"]

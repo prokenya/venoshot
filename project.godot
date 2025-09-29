@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="VehoShot"
+config/name="VenoShot"
 run/main_scene="uid://bm1ihsc5s8ipm"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="uid://b0dqr4s1clvno"
+config/icon="uid://tlrb0j4h1sso"
 
 [autoload]
 
@@ -64,3 +64,4 @@ reload={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

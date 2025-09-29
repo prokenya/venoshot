@@ -19,3 +19,11 @@ func _ready() -> void:
 	await tween.finished
 	get_tree().paused = false
 	queue_free()
+
+func _input(event: InputEvent) -> void:
+	if Input.is_anything_pressed():
+		var tween = create_tween() 
+		tween.tween_property(self, "modulate", Color(0.0, 0.0, 0.0, 0.0), 0.5)
+		await tween.finished
+		get_tree().paused = false
+		queue_free()

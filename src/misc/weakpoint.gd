@@ -22,8 +22,8 @@ func _ready() -> void:
 		point_types.heart:
 			sprite.animation = "heart"
 
-func _physics_process(delta: float) -> void:
-	self.z_index = body_to_damage.z_index
+#func _physics_process(delta: float) -> void:
+	#self.z_index = body_to_damage.z_index
 
 
 func damage(damage:int) -> int:

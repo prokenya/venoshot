@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=65 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
 [ext_resource type="Script" uid="uid://djgkn1e5d8l06" path="res://src/misc/wave.gd" id="2_iygna"]
@@ -14,8 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://bhero53kyb7pl" path="res://src/enemies/ufo.tscn" id="8_vo5gq"]
 [ext_resource type="AudioStream" uid="uid://5t8jh3lb1l3c" path="res://assets/audio/music/Level.mp3" id="11_ia7or"]
 [ext_resource type="Script" uid="uid://ng6nd7d346ts" path="res://src/ui/world_status.gd" id="11_svtf7"]
+[ext_resource type="Theme" uid="uid://dwa7h0uwdtfam" path="res://src/ui/main.tres" id="12_bevbp"]
 [ext_resource type="Texture2D" uid="uid://otvcab4jb5b0" path="res://assets/fonts/itchsplash4.png" id="14_7q1rl"]
 [ext_resource type="Texture2D" uid="uid://by47eosta05ax" path="res://assets/fonts/itchgameover2.png" id="15_7q1rl"]
+[ext_resource type="FontFile" uid="uid://bei2a3ul2jeho" path="res://assets/ui/FRAHV.TTF" id="15_cp87p"]
 [ext_resource type="AudioStream" uid="uid://cy5tqlwl72ab3" path="res://assets/audio/sfx/Game Over.mp3" id="16_f1p2y"]
 [ext_resource type="Texture2D" uid="uid://cdec8dtdyunie" path="res://assets/fonts/itchwin4.png" id="17_077sa"]
 [ext_resource type="AudioStream" uid="uid://c5mgngnloka4t" path="res://assets/audio/sfx/Victory.mp3" id="18_r7usx"]
@@ -254,6 +256,12 @@ enemies_count = 2
 hold_next_wave = true
 not_required_to_clear = true
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="LabelSettings" id="LabelSettings_nv4as"]
+font = ExtResource("15_cp87p")
+font_size = 45
+outline_size = 5
+outline_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_7q1rl"]
 length = 0.001
@@ -504,16 +512,29 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -36.0
-offset_right = 64.0
-offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("12_bevbp")
 texture = ExtResource("4_xk4xt")
 script = ExtResource("5_iygna")
 duration = 8.0
 metadata/_custom_type_script = "uid://cfy7tvkca3bxw"
+
+[node name="Label" type="Label" parent="FG/OnStartRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -52.0
+offset_right = 257.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press any button to skip"
+label_settings = SubResource("LabelSettings_nv4as")
+horizontal_alignment = 2
 
 [node name="wave" type="TextureRect" parent="FG"]
 visible = false

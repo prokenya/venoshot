@@ -124,7 +124,6 @@ sprite_frames = SubResource("SpriteFrames_5e5lm")
 autoplay = "default"
 
 [node name="weakpoint" parent="CollisionShape2D/AnimatedSprite2D" node_paths=PackedStringArray("body_to_damage") instance=ExtResource("3_5e5lm")]
-z_as_relative = false
 position = Vector2(-127.9999, -78.999985)
 scale = Vector2(1.2374994, 1.2374994)
 body_to_damage = NodePath("../../..")

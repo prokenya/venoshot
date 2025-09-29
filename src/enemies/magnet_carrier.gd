@@ -9,7 +9,7 @@ func _ready() -> void:
 	throw_barrel()
 
 func throw_barrel():
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer([9,8,7].pick_random()).timeout
 	var inst:RigidBody2D = barrel_scene.instantiate()
 	var angle: float
 	if randi() % 2 == 0:
