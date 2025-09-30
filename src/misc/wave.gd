@@ -9,6 +9,8 @@ enum enemy_types {
 	PowerUp,
 	Cloud,
 	UFO,
+	Boss,
+	Thorn,
 	Barrel,
 }
 

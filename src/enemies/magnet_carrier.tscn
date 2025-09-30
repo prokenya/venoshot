@@ -70,7 +70,7 @@ collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_c74y5")
 barrel_scene = ExtResource("2_v5dpy")
-barrel_spawn_point = NodePath("CollisionShape2D2/AnimatedSprite2D2/barell_spawn_point")
+barrel_spawn_point = NodePath("CollisionShape2D2/barell_spawn_point")
 max_hp = 5
 enemy_damage = 0
 mask_color = Color(6.617978e-08, 0.17933974, 0.08296644, 1)
@@ -88,9 +88,9 @@ position = Vector2(40, -20)
 sprite_frames = SubResource("SpriteFrames_v5dpy")
 autoplay = "default"
 
-[node name="barell_spawn_point" type="Marker2D" parent="CollisionShape2D2/AnimatedSprite2D2"]
-scale = Vector2(4, 4)
-
 [node name="weakpoint" parent="CollisionShape2D2/AnimatedSprite2D2" node_paths=PackedStringArray("body_to_damage") instance=ExtResource("4_njhom")]
 position = Vector2(-37.560974, -131.21951)
 body_to_damage = NodePath("../../..")
+
+[node name="barell_spawn_point" type="Marker2D" parent="CollisionShape2D2"]
+scale = Vector2(4, 4)

@@ -21,6 +21,6 @@ func throw_barrel():
 	
 	G.main.world.projectiles.add_child(inst)
 	inst.global_position = barrel_spawn_point.global_position
-	inst.apply_impulse(direction * 300)
+	inst.apply_impulse(direction * 150)
 	inst.angular_velocity = randf_range(-45,45)
 	throw_barrel()

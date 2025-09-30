@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwmifalxhu8fq"]
+
+[ext_resource type="Script" uid="uid://2t3wgw58cpj" path="res://src/enemies/thorn.gd" id="1_7od40"]
+[ext_resource type="Texture2D" uid="uid://b5s5emp33xh66" path="res://assets/misc/itchpart17.png" id="2_e3qj3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pbhsl"]
+radius = 107.85
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kd6s"]
+atlas = ExtResource("2_e3qj3")
+region = Rect2(0, 0, 320, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axs43"]
+atlas = ExtResource("2_e3qj3")
+region = Rect2(320, 0, 320, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vqx4s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kd6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axs43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
+[node name="thorn" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
+z_index = 99
+collision_mask = 0
+script = ExtResource("1_7od40")
+hp = 2
+enemy_damage = 4
+mask_color = Color(0.16276303, 0.26923245, 0.06395696, 1)
+speed = Vector2(250, 150)
+sprite = NodePath("CollisionShape2D/AnimatedSprite2D")
+collider = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://cp0mbbafdqoal"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pbhsl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+sprite_frames = SubResource("SpriteFrames_vqx4s")
+autoplay = "default"

@@ -97,7 +97,7 @@ func check_collision():
 			chosen = wp
 			break
 	
-	#4 damage
+	#3 damage
 	var damage_recived:int
 	if x2_damage:
 		damage_recived = chosen.damage(2)
@@ -107,10 +107,7 @@ func check_collision():
 		animation_player.play("shot_animation_normal")
 	match damage_recived:
 		1:animation_player.play("shot_animation_normal")
-		2:
-			animation_player.play("shot_animation_critical")
-			shoot_critical.play()
-		1000:
+		2, 1000:
 			animation_player.play("shot_animation_critical")
 			shoot_critical.play()
 			

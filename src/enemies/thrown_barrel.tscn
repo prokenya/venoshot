@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://3iaxuhu6ab4s"]
+[gd_scene load_steps=15 format=3 uid="uid://3iaxuhu6ab4s"]
 
 [ext_resource type="Script" uid="uid://dnii6knn3uxbb" path="res://src/enemies/thrown_barrel.gd" id="1_4v80t"]
 [ext_resource type="Texture2D" uid="uid://bd7cuglddvbnt" path="res://assets/enemies/itchbarrel1.png" id="2_7it1h"]
+[ext_resource type="Texture2D" uid="uid://bpf4adsu61ru1" path="res://assets/misc/itchpart16.png" id="3_lva6s"]
+[ext_resource type="AudioStream" uid="uid://cjxls2sfhgei6" path="res://assets/audio/sfx/ExplosionSFX.wav" id="4_u86je"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i3y7n"]
 bounce = 1.1
@@ -9,13 +11,60 @@ bounce = 1.1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dceei"]
 size = Vector2(100, 147)
 
-[node name="Thrown barrel" type="RigidBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u86je"]
+atlas = ExtResource("3_lva6s")
+region = Rect2(415, 293, 201, 152)
+
+[sub_resource type="Gradient" id="Gradient_6qdad"]
+offsets = PackedFloat32Array(0.00243309, 0.33333334, 1)
+colors = PackedColorArray(1, 0.63897395, 0.5457031, 1, 1, 0.26666665, 0, 1, 0.051970966, 0.05197096, 0.05197095, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7stm7"]
+gradient = SubResource("Gradient_6qdad")
+
+[sub_resource type="Curve" id="Curve_wf5xx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_tbhxj"]
+curve = SubResource("Curve_wf5xx")
+
+[sub_resource type="Curve" id="Curve_lva6s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8169337, 0.446087), -0.15765941, -0.15765941, 0, 0, Vector2(1, 0.09565222), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u86je"]
+curve = SubResource("Curve_lva6s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nnklr"]
+lifetime_randomness = 0.45
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 85.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_max = 463.16
+orbit_velocity_min = -0.1519999
+orbit_velocity_max = 0.1190001
+gravity = Vector3(0, 98, 0)
+scale_min = 0.7
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_u86je")
+color_ramp = SubResource("GradientTexture1D_7stm7")
+emission_curve = SubResource("CurveTexture_tbhxj")
+
+[node name="Thrown barrel" type="RigidBody2D" node_paths=PackedStringArray("explosion", "sprite_2d")]
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_i3y7n")
 continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 100
 script = ExtResource("1_4v80t")
+explosion = NodePath("explosion")
+sprite_2d = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8.5)
@@ -24,5 +73,20 @@ shape = SubResource("RectangleShape2D_dceei")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_7it1h")
+
+[node name="explosion" type="GPUParticles2D" parent="."]
+position = Vector2(1, -1)
+emitting = false
+amount = 32
+texture = SubResource("AtlasTexture_u86je")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_nnklr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u86je")
+bus = &"sfx"
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

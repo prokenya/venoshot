@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://c47cwpn6asvti"]
+[gd_scene load_steps=68 format=3 uid="uid://c47cwpn6asvti"]
 
 [ext_resource type="Script" uid="uid://dq0lruda4lttv" path="res://src/levels/world.gd" id="1_un1bx"]
 [ext_resource type="Script" uid="uid://djgkn1e5d8l06" path="res://src/misc/wave.gd" id="2_iygna"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b7se0ec1t7uis" path="res://src/enemies/power_up.tscn" id="6_ia7or"]
 [ext_resource type="PackedScene" uid="uid://cvbhv348l84tk" path="res://src/enemies/hidden_cloud.tscn" id="7_riplu"]
 [ext_resource type="PackedScene" uid="uid://bhero53kyb7pl" path="res://src/enemies/ufo.tscn" id="8_vo5gq"]
+[ext_resource type="PackedScene" uid="uid://bwmifalxhu8fq" path="res://src/enemies/thorn.tscn" id="10_nv4as"]
 [ext_resource type="AudioStream" uid="uid://5t8jh3lb1l3c" path="res://assets/audio/music/Level.mp3" id="11_ia7or"]
 [ext_resource type="Script" uid="uid://ng6nd7d346ts" path="res://src/ui/world_status.gd" id="11_svtf7"]
 [ext_resource type="Theme" uid="uid://dwa7h0uwdtfam" path="res://src/ui/main.tres" id="12_bevbp"]
@@ -23,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://c5mgngnloka4t" path="res://assets/audio/sfx/Victory.mp3" id="18_r7usx"]
 [ext_resource type="Texture2D" uid="uid://biiv0xhuwqheq" path="res://assets/fonts/itchcredits2.png" id="19_svo37"]
 [ext_resource type="AudioStream" uid="uid://bu5lg2yrr4f80" path="res://assets/audio/music/Credits.mp3" id="20_5ib0j"]
+[ext_resource type="PackedScene" uid="uid://dkx6ewo321563" path="res://src/enemies/boss.tscn" id="23_cp87p"]
 
 [sub_resource type="Resource" id="Resource_vo5gq"]
 script = ExtResource("2_iygna")
@@ -229,7 +231,7 @@ metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 script = ExtResource("2_iygna")
 time_before_wave = 10.0
 enemy_type = 1
-enemies_count = 6
+enemies_count = 4
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
 [sub_resource type="Resource" id="Resource_d7y0v"]
@@ -245,7 +247,7 @@ metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 script = ExtResource("2_iygna")
 time_before_wave = 20.0
 enemy_type = 2
-enemies_count = 5
+enemies_count = 3
 orbit = 2
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
@@ -255,6 +257,14 @@ enemy_type = 5
 enemies_count = 2
 hold_next_wave = true
 not_required_to_clear = true
+metadata/_custom_type_script = "uid://djgkn1e5d8l06"
+
+[sub_resource type="Resource" id="Resource_jpet4"]
+script = ExtResource("2_iygna")
+time_before_wave = 2.0
+enemy_type = 7
+hold_next_wave = true
+spawn_position = Vector2(1, 0)
 metadata/_custom_type_script = "uid://djgkn1e5d8l06"
 
 [sub_resource type="LabelSettings" id="LabelSettings_nv4as"]
@@ -482,13 +492,14 @@ _data = {
 &"win": SubResource("Animation_r7usx")
 }
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("enemies_parent", "projectiles", "world_status")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("enemies_parent", "projectiles", "world_status", "music")]
 script = ExtResource("1_un1bx")
 enemies_parent = NodePath("enemies")
 projectiles = NodePath("projectiles")
-enemies = Array[PackedScene]([ExtResource("2_kg615"), ExtResource("3_frwdw"), ExtResource("4_q2d1y"), ExtResource("5_fcumj"), ExtResource("6_ia7or"), ExtResource("7_riplu"), ExtResource("8_vo5gq")])
-waves = Array[ExtResource("2_iygna")]([SubResource("Resource_vo5gq"), SubResource("Resource_q2tyl"), SubResource("Resource_svtf7"), SubResource("Resource_7q1rl"), SubResource("Resource_f1p2y"), SubResource("Resource_r7usx"), SubResource("Resource_077sa"), SubResource("Resource_svo37"), SubResource("Resource_5ib0j"), SubResource("Resource_sblag"), SubResource("Resource_bevbp"), SubResource("Resource_cp87p"), SubResource("Resource_nv4as"), SubResource("Resource_6dq8q"), SubResource("Resource_dccqd"), SubResource("Resource_nqqvn"), SubResource("Resource_mrfvu"), SubResource("Resource_5gh05"), SubResource("Resource_gu6wu"), SubResource("Resource_88lg4"), SubResource("Resource_j0n5w"), SubResource("Resource_bniaj"), SubResource("Resource_upltw"), SubResource("Resource_x386j"), SubResource("Resource_tm7u4"), SubResource("Resource_hfu2f"), SubResource("Resource_m2r0a"), SubResource("Resource_aof1p"), SubResource("Resource_7t86w"), SubResource("Resource_ygn84"), SubResource("Resource_yjdh3"), SubResource("Resource_d7y0v"), SubResource("Resource_kr672"), SubResource("Resource_p52to")])
+enemies = Array[PackedScene]([ExtResource("2_kg615"), ExtResource("3_frwdw"), ExtResource("4_q2d1y"), ExtResource("5_fcumj"), ExtResource("6_ia7or"), ExtResource("7_riplu"), ExtResource("8_vo5gq"), ExtResource("23_cp87p"), ExtResource("10_nv4as")])
+waves = Array[ExtResource("2_iygna")]([SubResource("Resource_vo5gq"), SubResource("Resource_q2tyl"), SubResource("Resource_svtf7"), SubResource("Resource_7q1rl"), SubResource("Resource_f1p2y"), SubResource("Resource_r7usx"), SubResource("Resource_077sa"), SubResource("Resource_svo37"), SubResource("Resource_5ib0j"), SubResource("Resource_sblag"), SubResource("Resource_bevbp"), SubResource("Resource_cp87p"), SubResource("Resource_nv4as"), SubResource("Resource_6dq8q"), SubResource("Resource_dccqd"), SubResource("Resource_nqqvn"), SubResource("Resource_mrfvu"), SubResource("Resource_5gh05"), SubResource("Resource_gu6wu"), SubResource("Resource_88lg4"), SubResource("Resource_j0n5w"), SubResource("Resource_bniaj"), SubResource("Resource_upltw"), SubResource("Resource_x386j"), SubResource("Resource_tm7u4"), SubResource("Resource_hfu2f"), SubResource("Resource_m2r0a"), SubResource("Resource_aof1p"), SubResource("Resource_7t86w"), SubResource("Resource_ygn84"), SubResource("Resource_yjdh3"), SubResource("Resource_d7y0v"), SubResource("Resource_kr672"), SubResource("Resource_p52to"), SubResource("Resource_jpet4")])
 world_status = NodePath("FG")
+music = NodePath("music")
 metadata/_custom_type_script = "uid://dq0lruda4lttv"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -532,7 +543,7 @@ offset_top = -52.0
 offset_right = 257.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Press any button to skip"
+text = "Press any key to skip"
 label_settings = SubResource("LabelSettings_nv4as")
 horizontal_alignment = 2
 
@@ -627,8 +638,4 @@ bus = &"music"
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_ia7or")
 autoplay = true
-bus = &"music"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_r7usx")
 bus = &"music"

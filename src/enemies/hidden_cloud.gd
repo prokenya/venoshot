@@ -17,6 +17,8 @@ func procces_die():
 		velocity = Vector2.ZERO
 		animation_player.play("rain")
 		dies = true
+		set_collision_layer_value(1,false)
+
 		await animation_player.animation_finished
 		sprite.play("die")
 		await sprite.animation_finished
