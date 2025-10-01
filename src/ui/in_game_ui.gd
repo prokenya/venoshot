@@ -8,10 +8,13 @@ var bullets_values: Dictionary = {
 }
 
 var hp_tween: Tween
+var buff_ba_tween:Tween
 var relodaing_tween: Tween
 
-@onready var bullets_clip: TextureProgressBar = $HBoxContainer/bullets_clip
-@onready var hpbar: TextureProgressBar = $HBoxContainer/hpbar
+@export var bullets_clip: TextureProgressBar
+@export var hpbar: TextureProgressBar
+@export var buff_bar:TextureProgressBar
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func set_clip_status(bullets_left):
@@ -33,7 +36,9 @@ func show_reloading_animations(duration: float = 2.5):
 	var offset := 35
 	var start_pos := bullets_clip.position
 	var up_pos := start_pos + Vector2(0, -offset)
-
+	
+	animation_player.play("show_reload")
+	
 	relodaing_tween = create_tween()
 	relodaing_tween.tween_property(bullets_clip, "position", up_pos, duration / 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	relodaing_tween.tween_property(bullets_clip, "position", start_pos, duration / 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

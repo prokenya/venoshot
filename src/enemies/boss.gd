@@ -7,6 +7,7 @@ var spawn_rate:int = 8.5
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 @onready var gpu_particles_2d_2: GPUParticles2D = $GPUParticles2D2
 const BOSS = preload("uid://db256btvnbd5s")
+@onready var timer: Timer = $Timer
 
 
 
@@ -43,8 +44,8 @@ func attack():
 	wave.spawn_position = spawn_pos
 	
 	G.main.world.spawn_wave(wave)
-	
-	await get_tree().create_timer(spawn_rate).timeout
+	timer.start(spawn_rate)
+	await timer.timeout
 	attack()
 
 func damage(damage: int = 1) -> int:

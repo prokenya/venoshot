@@ -5,20 +5,26 @@ extends Node2D
 @export var scope: Sprite2D
 @export var shape_cast: ShapeCast2D
 @export var timer: Timer
+
 @export var bullets_left: int = 8
 
-@export var shot_sprite: Sprite2D
+@export var shot_sprite: AnimatedSprite2D
 @export var animation_player: AnimationPlayer
 
 @export var shot_audio: AudioStreamPlayer
+
+var max_clip_size = 8
+var x2_damage: bool = false
+@export var max_x2_duration = 30
+var reloadig: bool = false
+
+@onready var x_2_damage_timer: Timer = $x2_damage_timer
 @onready var reloading: AudioStreamPlayer = $reloading
 @onready var shoot_critical: AudioStreamPlayer = $shoot_critical
 @onready var empty_shot: AudioStreamPlayer = $empty_shot
 
-
-var max_clip_size = 8
-var x2_damage:bool = false
-var reloadig:bool = false
+func _ready() -> void:
+	x_2_damage_timer.timeout.connect(func():x2_damage = false)
 
 func _input(event: InputEvent) -> void:
 	var view_rect: Rect2 = get_viewport().get_visible_rect()
@@ -36,7 +42,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("reload") and bullets_left < max_clip_size:
 		reload()
 
+func _physics_process(delta: float) -> void:
+	var value = float(x_2_damage_timer.time_left) / float(max_x2_duration) * 100
 
+	G.main.in_game_ui.buff_bar.value = value
+	
 func shot():
 	bullets_left -= 1
 
@@ -53,14 +63,14 @@ func shot():
 func check_collision():
 	shape_cast.global_position = scope.global_position
 	shape_cast.force_shapecast_update()
-	
+
 	var count: int = shape_cast.get_collision_count()
 	if count == 0:
 		return
-	
+
 	var enemies: Array = []
 	var weakpoints: Array[Weakpoint] = []
-	
+
 	#0 split
 	for i in count:
 		var collider = shape_cast.get_collider(i)
@@ -68,10 +78,10 @@ func check_collision():
 			enemies.append(collider)
 		elif collider is Weakpoint:
 			weakpoints.append(collider)
-	
+
 	if enemies.is_empty() and weakpoints.is_empty():
 		return
-	
+
 	#1 sort enemies
 	var nearest_enemy = null
 	var nearest_enemy_index := -1
@@ -86,38 +96,45 @@ func check_collision():
 			elif enemy.z_index == nearest_enemy.z_index and enemy.get_index() > nearest_enemy_index:
 				nearest_enemy = enemy
 				nearest_enemy_index = enemy.get_index()
-	
+
 	if nearest_enemy == null:
 		return
-	
+
 	#2check weakpoint
 	var chosen: Node2D = nearest_enemy
 	for wp in weakpoints:
 		if wp.body_to_damage == nearest_enemy:
 			chosen = wp
 			break
-	
+
 	#3 damage
-	var damage_recived:int
+	var damage_recived: int
 	if x2_damage:
 		damage_recived = chosen.damage(2)
-		animation_player.play("shot_animation_critical")
 	else:
 		damage_recived = chosen.damage(1)
-		animation_player.play("shot_animation_normal")
 	match damage_recived:
-		1:animation_player.play("shot_animation_normal")
-		2, 1000:
+		1: animation_player.play("shot_animation_normal")
+		2:
+			animation_player.play("shot_animation_x2_damage")
+			shoot_critical.play()
+		1000:
 			animation_player.play("shot_animation_critical")
 			shoot_critical.play()
-			
+
 	shot_sprite.global_position = shape_cast.global_position
 
 
-func set_x2damage(time:int = 10):
+func set_x2damage(duration: float = 10.0) -> void:
 	x2_damage = true
-	await get_tree().create_timer(time).timeout
-	x2_damage = false
+
+	var remaining := 0.0
+	if not x_2_damage_timer.is_stopped():
+		remaining = x_2_damage_timer.time_left
+
+	var total_time = clamp(duration + remaining, 0.0, max_x2_duration)
+	x_2_damage_timer.start(total_time)
+
 
 
 func reload():
@@ -137,5 +154,5 @@ func reload():
 func show_shot_effect():
 	weapon_body.play("shot")
 	shot_audio.play()
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.24).timeout
 	weapon_body.play("default")

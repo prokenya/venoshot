@@ -94,3 +94,7 @@ body_to_damage = NodePath("../../..")
 
 [node name="barell_spawn_point" type="Marker2D" parent="CollisionShape2D2"]
 scale = Vector2(4, 4)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true

@@ -160,3 +160,6 @@ lifetime = 2.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_n0hu2")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

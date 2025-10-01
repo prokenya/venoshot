@@ -5,7 +5,7 @@ extends Enemy
 
 func _ready() -> void:
 	super()
-	speed.x *= [1,-1].pick_random()
+	velocity.x *= [1,-1].pick_random()
 
 func _physics_process(delta: float) -> void:
 	super(delta)
